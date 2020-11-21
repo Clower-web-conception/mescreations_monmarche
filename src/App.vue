@@ -70,8 +70,14 @@ a {
     }
     &.plein {
       background: black;
+      width: fit-content;
+      cursor: pointer;
       &.warn {
         background-color: #EDC124;
+      }
+      &.info {
+        color: white;
+        background-color: #0064A1;
       }
     }
   }
