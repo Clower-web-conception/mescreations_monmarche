@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <MobileNav/>
     <transition name="slide">
       <router-view></router-view>
     </transition>
@@ -7,79 +8,220 @@
 </template>
 
 <script>
+import MobileNav from "@/components/MobileNav";
 export default {
   name: 'App',
+  components: {MobileNav},
 }
 </script>
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Satisfy&Montserrat&display=swap');
 
+/*
+.########.....###.....######..########....##.....##.########.##.....##.##......
+.##.....##...##.##...##....##.##..........##.....##....##....###...###.##......
+.##.....##..##...##..##.......##..........##.....##....##....####.####.##......
+.########..##.....##..######..######......#########....##....##.###.##.##......
+.##.....##.#########.......##.##..........##.....##....##....##.....##.##......
+.##.....##.##.....##.##....##.##..........##.....##....##....##.....##.##......
+.########..##.....##..######..########....##.....##....##....##.....##.########
+*/
 html {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+  font-size: 16px;
+  overflow-x: hidden;
 
   body {
-    font-size: 16px;
     padding: 0;
     margin: 0;
-    height: 100%;
-  }
-}
-#app {
-  height: 100%;
-}
-
-span, p, button, a, li {
-  font-family: 'Pacifico', cursive;
-}
-
-input, label, textarea {
-  font-family: 'Montserrat Medium', sans-serif;
-}
-
-h1, h2, h3, h4, h5{
-    font-family: 'Satisfy', cursive;
-}
-
-h1 {
- font-size: 4rem;
-}
-
-div {
-  &.container-plein {
     width: 100%;
-    height: 100%;
   }
-}
-a {
-  text-decoration: none;
-  &.btn {
-    padding: 6px 18px;
-    color: black;
-    font-size: 1rem;
+
+  h1 {
+    font-size: clamp(34px, 50px, 5vw);
+  }
+
+  h2 {
+    font-size: clamp(28px, 42px, 5vw);
+  }
+
+  h3 {
+    font-size: clamp(24px, 38px, 5vw);
+  }
+  .container-95 {
+    width: 95%;
+    height: 95vh;
+    margin: auto;
+    position: relative;
     display: flex;
-    align-items: center;
-    &.fill {
-      border: 3px solid black;
-      &.white {
-        border-color: white;
-        color: white;
-      }
+    flex-direction: column;
+  }
+
+  .m-3 {
+    margin: 3em;
+  }
+
+  .mt-2 {
+    margin-top: 2em;
+  }
+  .color-white {
+    color: white;
+  }
+
+  p {
+    font-family: 'Montserrat Medium', sans-serif;
+    font-size: clamp(10px, 14px, 4vw);
+  }
+
+  .color-green,
+  .cta {
+    font-family: 'Pacifico', cursive;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: 'Satisfy', cursive;
+  }
+
+  .color-green {
+    color: #3BED6D;
+  }
+
+  .grid {
+    display: grid;
+  }
+
+  .cta {
+    text-decoration: none;
+    padding: .5em 1em;
+    display: flex;
+    justify-content: space-between;
+    font-size: clamp(12px, 16px, 2vw);
+    &.cta-blue {
+      background-color: #0C21ED;
+      color: white;
     }
-    &.plein {
-      background: black;
-      width: fit-content;
-      cursor: pointer;
-      &.warn {
-        background-color: #EDC124;
+    &.cta-default {
+      background-color: white;
+      color: gray;
+    }
+  }
+
+  .absolute-99 {
+    position: absolute;
+    z-index: 99;
+  }
+
+  .shadow {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  }
+
+
+  .cta-container {
+    display: flex;
+    margin: auto;
+    width: 100%;
+    justify-content: space-evenly;
+    * {
+      width: 30%;
+    }
+    a {
+      text-align: center;
+      justify-content: space-evenly;
+    }
+  }
+
+  input {
+    &.fill {
+      background-color: rgba(255, 255, 255, 0);
+      outline: none;
+      padding: 1em;
+      font-family: 'Montserrat Medium', sans-serif;
+      &:focus {
+        background-color: rgba(255, 255, 255, 0);
+        border: none;
       }
-      &.info {
+
+      &.fill-yellow {
+        border: 4px solid #EDC124;
         color: white;
-        background-color: #0064A1;
+        &::placeholder {
+          color: white;
+        }
       }
     }
   }
 }
+
+
+/*
+.########..########..######..##....##.########..#######..########.
+.##.....##.##.......##....##.##...##.....##....##.....##.##.....##
+.##.....##.##.......##.......##..##......##....##.....##.##.....##
+.##.....##.######....######..#####.......##....##.....##.########.
+.##.....##.##.............##.##..##......##....##.....##.##.......
+.##.....##.##.......##....##.##...##.....##....##.....##.##.......
+.########..########..######..##....##....##.....#######..##.......
+*/
+@media only screen and (min-width: 1080px) {
+}
+
+/*
+.########....###....########..##.......########.########
+....##......##.##...##.....##.##.......##..........##...
+....##.....##...##..##.....##.##.......##..........##...
+....##....##.....##.########..##.......######......##...
+....##....#########.##.....##.##.......##..........##...
+....##....##.....##.##.....##.##.......##..........##...
+....##....##.....##.########..########.########....##...
+*/
+
+@media only screen and (max-width: 1080px) {
+  .mt-md-0 {
+    margin-top: 0!important;
+  }
+  .container-md-full {
+    width: 100%;
+    height: 100vh;
+    padding: 12px;
+  }
+  .bg-img {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1080px) and (min-width: 530px) {
+  .cta-container {
+    display: grid;
+    grid-auto-rows: auto;
+    align-items: center;
+    margin-bottom: 2em;
+    input {
+      display: flex;
+      width: 80%;
+    }
+  }
+}
+/*
+.##.....##..#######..########..####.##.......########
+.###...###.##.....##.##.....##..##..##.......##......
+.####.####.##.....##.##.....##..##..##.......##......
+.##.###.##.##.....##.########...##..##.......######..
+.##.....##.##.....##.##.....##..##..##.......##......
+.##.....##.##.....##.##.....##..##..##.......##......
+.##.....##..#######..########..####.########.########
+*/
+@media only screen and (max-width: 530px) {
+  .cta-container {
+    display: none!important;
+  }
+}
+
+
 </style>
