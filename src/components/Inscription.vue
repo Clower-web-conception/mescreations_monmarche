@@ -9,41 +9,41 @@
         <span id="nb-char" v-html="msg">{{msg}}</span>
       </div>
       <div class="form-item horizontal">
-        <label class="bg-yellow" for="name">Nom Prénom</label>
+        <label class="bg-yellow" for="name">Nom Prénom<small>(Obligatoire)</small></label>
         <input type="text" id="name" :value="nom_prenom" required>
       </div>
       <div class="form-item horizontal">
-        <label class="bg-yellow" for="nom_de_la_societe">Nom de la société</label>
+        <label class="bg-yellow" for="nom_de_la_societe">Nom de la société<small>(Obligatoire)</small></label>
         <input type="text" id="nom_de_la_societe" :value="nom_societe" required>
       </div>
       <div class="form-item horizontal">
-        <label class="bg-yellow" for="type">Type de société</label>
+        <label class="bg-yellow" for="type">Type de société<small>(Obligatoire)</small></label>
         <select  id="type" name="type" v-model="catSelected" required>
           <option disabled value="">Choisir le type de société</option>
           <option v-for="cat in Object.getOwnPropertyNames(JSON.parse(JSON.stringify(categories)))" v-bind:key="cat" :value="cat">{{ cat }}</option>
         </select>
       </div>
       <div  class="form-item horizontal" v-if="catSelected">
-        <label class="bg-yellow" for="cat-selected">Catégorie d'activité</label>
+        <label class="bg-yellow" for="cat-selected">Catégorie d'activité<small>(Obligatoire)</small></label>
         <select id="cat-selected" required>
           <option disabled value="">Choisir une catégorie</option>
           <option v-for="c in categories[catSelected]" :key="c.id">{{c}}</option>
         </select>
       </div>
       <div class="form-item horizontal">
-        <label class="bg-yellow" for="adresse">Adresse postale</label>
+        <label class="bg-yellow" for="adresse">Adresse postale<small>(Obligatoire)</small></label>
         <input type="text" name="adresse" id="adresse" :value="adresse" required>
       </div>
       <div class="form-item horizontal">
-        <label class="bg-yellow" for="ville">Ville</label>
+        <label class="bg-yellow" for="ville">Ville<small>(Obligatoire)</small></label>
         <input type="text" name="ville" id="ville" :value="ville" required>
       </div>
       <div class="form-item horizontal">
-        <label class="bg-yellow" for="cp">Code postale</label>
+        <label class="bg-yellow" for="cp">Code postale<small>(Obligatoire)</small></label>
         <input type="text" name="cp" id="cp" :value="cp" required>
       </div>
       <div class="form-item ">
-        <label class="bg-yellow" for="description">Description</label>
+        <label class="bg-yellow" for="description">Description<small>(Conseillé)</small></label>
         <textarea rows="10" name="description" id="description" :value="description"  maxlength="250"></textarea>
       </div>
     </div>
@@ -53,14 +53,9 @@
       <h3>Ma vitrine en image</h3>
       <div class="form-item">
         <label class="bg-yellow" for="galery">Téléverser ma galerie<small>(6 photos maximum)</small></label>
-        <input type="file" name="galery" id="galery" multiple>
-        <ul id="galeryFiles">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
+        <input type="file" name="galery" id="galery" @change="onFilesSelected" multiple>
+        <ul id="galeryFiles" v-if="selectedFiles !== null">
+          <li v-for="img in selectedFiles" v-bind:key="img.index"><img :src="img"><span @click="removeImage(img)" class="remove-image">x</span><input type="text" :value="imgAlt" placeholder="Titre de l'image"></li>
         </ul>
       </div>
     </div>
@@ -82,11 +77,11 @@
           <input type="text" name="site" id="site">
         </div>
         <div class="form-item">
-          <label class="bg-default" for="mail">Adresse mail</label>
+          <label class="bg-yellow" for="mail">Adresse mail</label>
           <input type="text" name="mail" id="mail">
         </div>
         <div class="form-item">
-          <label class="bg-default" for="phone">N° de téléphone</label>
+          <label class="bg-yellow" for="phone">N° de téléphone</label>
           <input type="text" name="phone" id="phone">
         </div>
       </div>
@@ -147,7 +142,8 @@ export default {
       ville: '',
       cp: '',
       toastClass: '',
-      errorStatus: false
+      errorStatus: false,
+      selectedFiles: []
     }
   },
   watch: {
@@ -165,7 +161,6 @@ export default {
               '</span>'
         }
       }
-
     }
   },
   created : function () {
@@ -205,7 +200,6 @@ export default {
             vm.adresse = `${rootData.adresseEtablissement.numeroVoieEtablissement} ${rootData.adresseEtablissement.libelleVoieEtablissement}`
             vm.ville = rootData.adresseEtablissement.libelleCommuneEtablissement
             vm.cp = rootData.adresseEtablissement.codePostalEtablissement
-            console.log(vm.nom_societe)
           })
           .catch(function (e){
             if (e.response.status !== 200) {
@@ -228,7 +222,32 @@ export default {
      * method: POST
      * Envoie de l'ensemble des données vers une page du BO
      */
-    postsFullEntryOnDraft : function () {}
+    postsFullEntryOnDraft : function () {},
+
+    onFilesSelected : function (e) {
+      let files = e.target.files || e.dataTransfer.files
+      if(!files) return
+      files.forEach(el => {
+          this.createImage(el)
+      })
+    },
+    createImage : function (file) {
+      let reader = new FileReader();
+      let vm = this;
+      reader.onload = (e) => {
+        if (vm.selectedFiles.length <= 6 - 1) {
+          vm.selectedFiles.push(e.target.result)
+        } else {
+          vm.errorStatus = true
+          vm.notification = 'La galerie ne peut contenir que 6 photos maximum'
+        }
+      };
+      reader.readAsDataURL(file);
+    },
+    removeImage : function (i) {
+      let vm = this
+      vm.selectedFiles.splice(this.selectedFiles.indexOf(i), 1)
+    }
   }
 }
 
@@ -273,6 +292,9 @@ form {
       grid-template-columns: 0.45fr 1fr;
     }
   }
+  button {
+    font-size: clamp(12px, 20px, 1vw);
+  }
   label, button {
     padding: .5em;
     &.bg-default {
@@ -286,9 +308,9 @@ form {
       border: .5px solid #a38519;
     }
     &.bg-green {
+      padding: 1rem;
       background-color: #3BED6D;
-      color: #1a1a1a;
-      font-weight: bold;
+      color: #ffffff;
       border: .5px solid #a38519;
     }
   }
@@ -304,6 +326,7 @@ form {
     width: 100%;
   }
   #galeryFiles {
+    box-sizing: border-box;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     flex-wrap: wrap;
@@ -314,15 +337,27 @@ form {
     gap: 4px;
     justify-items: center;
     li {
-      object-fit: cover;
-      max-width: 300px;
-      max-height: 300px;
-      min-width: 64px;
-      min-height: 64px;
-      width: clamp(64px, 300px, 10vw);
-      height: clamp(64px, 300px, 10vw);
-      background: #dbdbdb;
-      border: 1px solid #c1c1c1;
+      text-align: -webkit-center;
+      text-align: -moz-center;
+      text-align: center;
+      position: relative;
+      .remove-image {
+        color: red;
+        position: absolute;
+        top: 0;
+        left: 95%;
+        font-size: large;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      input {
+        max-width: 160px;
+      }
+      img {
+        max-width: 175px;
+        max-height: 175px;
+        height: fit-content;
+      }
     }
   }
 }
@@ -341,6 +376,20 @@ small {
   .mob-vertical {
     grid-template-rows: auto 1fr!important;
     grid-template-columns: 1fr!important;
+  }
+
+  #galeryFiles {
+    grid-template-columns: 1fr 1fr!important;
+    li {
+      min-height: 64px;
+      object-fit: cover;
+      .remove-image {
+        font-size: x-large!important;
+      }
+      img {
+        width: 100%!important;
+      }
+    }
   }
 }
 

@@ -33,6 +33,7 @@ html {
   box-sizing: border-box;
   font-size: 16px;
   overflow-x: hidden;
+  -ms-overflow-x: hidden;
 
   body {
     padding: 0;
@@ -193,6 +194,10 @@ html {
   }
   .bg-img {
     width: 100%;
+  }
+  #app {
+    overflow-x: hidden;
+    -ms-overflow-x: hidden;
   }
 }
 

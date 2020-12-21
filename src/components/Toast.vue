@@ -28,6 +28,7 @@ name: "Toast",
   -webkit-animation: 10s ease-in-out;
   -webkit-animation-name: toasting;
   animation-name: toasting;
+  z-index: 99;
   &.red {
     background-color: #EE0D12;
   }
