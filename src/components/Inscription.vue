@@ -1,5 +1,6 @@
 <template>
 <div>
+  <h1 class="branding"><router-link to="/" href="">Mes Créations <br> Mon marché</router-link></h1>
   <form action="" enctype="multipart/form-data">
     <div>
       <h3>Informations d'entreprise</h3>
@@ -255,6 +256,13 @@ export default {
 
 <style lang="scss" scoped>
 
+.branding {
+  border-color: black;
+  a {
+    color: black;
+  }
+}
+
 /*
 .########..#######..########..##.....##.##.....##.##..........###....####.########..########
 .##.......##.....##.##.....##.###...###.##.....##.##.........##.##....##..##.....##.##......
@@ -269,7 +277,7 @@ form {
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   font-family: "montserrat", sans-serif;
-  font-size: clamp(10px, 14px, 1vw);
+  font-size: clamp(10px, 14px, 3vw);
   padding: 4em;
   .form-group {
     display: grid;

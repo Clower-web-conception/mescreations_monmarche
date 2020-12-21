@@ -5,7 +5,7 @@
       <p>auteur : Jacek Dylag | <a href='https://unsplash.com/@dylu'>@dylu</a></p>
     </div>
     <div class="m-3">
-      <h1>Mes création<br>Mon marché</h1>
+      <h1 class="branding"><router-link to="/" href="">Mes Créations <br> Mon marché</router-link></h1>
       <h2>Trouvez les créations qui vous font envies !</h2>
     </div>
     <div class="cta-container">
@@ -32,6 +32,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+h1 {
+  a {
+    color: #ececec;
+  }
+}
 
 .bg-img {
   background-image: url("../assets/mader.png");

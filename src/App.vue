@@ -43,6 +43,14 @@ html {
 
   h1 {
     font-size: clamp(34px, 50px, 5vw);
+    &.branding {
+      border: 4px solid white;
+      width: fit-content;
+      padding: 1rem;
+    }
+    a {
+      text-decoration: none;
+    }
   }
 
   h2 {
