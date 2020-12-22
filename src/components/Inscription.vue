@@ -107,7 +107,7 @@
       </div>
       <div class="form-item horizontal mob-vertical">
         <div></div>
-        <button type="submit" class="bg-green">Envoyer</button>
+        <a @click="valideForm" class="bg-green">Envoyer</a>
       </div>
     </div>
   </form>
@@ -144,7 +144,8 @@ export default {
       cp: '',
       toastClass: '',
       errorStatus: false,
-      selectedFiles: []
+      selectedFiles: [],
+      imgAlt: []
     }
   },
   watch: {
@@ -213,18 +214,38 @@ export default {
      * method: POST
      * post les différents photo dans le dossier "upload"
      */
-    postMedias : function () {},
+    postMedias : function () {
+      let formData = new FormData()
+      this.selectedFiles.forEach((img) => {
+        formData.append('file', img)
+      })
+      console.log(formData)
+        axios.post('http://35.181.24.239.xip.io/wp-json/wp/v2/media', formData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            }
+        ).then(function(){
+          console.log('SUCCESS!!');
+        })
+            .catch(function(error){
+              console.log(error);
+            });
+    },
     /**
      * method: POST
      * création du compte utilisateur
      */
-    postSignUp : function () {},
-    /**
-     * method: POST
-     * Envoie de l'ensemble des données vers une page du BO
-     */
-    postsFullEntryOnDraft : function () {},
+    postSignUp : function () {
 
+    },
+    postsInformations: function () {
+      this.postMedias()
+    },
+    valideForm : function () {
+      this.postsInformations()
+    },
     onFilesSelected : function (e) {
       let files = e.target.files || e.dataTransfer.files
       if(!files) return
@@ -303,8 +324,9 @@ form {
   button {
     font-size: clamp(12px, 20px, 1vw);
   }
-  label, button {
+  label, button, a {
     padding: .5em;
+    cursor: pointer;
     &.bg-default {
       background-color: rgb(214, 214, 214);
       color: rgb(92, 92, 92);

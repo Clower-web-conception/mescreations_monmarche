@@ -1,13 +1,13 @@
 <template>
   <nav class="mobile-bar bottom">
     <ul>
-      <li><a href="">Chercher</a></li>
-      <li><a href="">
-        <div class="menu">
-          <span>Menu</span>
+      <li class="bg-yellow"><a href="">Chercher</a></li>
+      <li class="bg-blue"><router-link to="/inscription" href="">Ajouter</router-link></li>
+      <li class="menu"><a href="">
+        <div>
+          <span>MENU</span>
         </div>
       </a></li>
-      <li><router-link to="/inscription" href="">Ajouter</router-link></li>
     </ul>
   </nav>
 </template>
@@ -64,8 +64,7 @@ name: "MobileNav"
       z-index: 99;
       width: 100%;
       text-align: center;
-      background-color: white;
-      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.25);
+      background-color: rgba(0, 0, 0, 0);
 
       &.bottom {
         position: fixed;
@@ -77,47 +76,42 @@ name: "MobileNav"
 
     ul {
       list-style: none;
-      padding: 12px 0;
       margin: 0;
       display: grid;
-      grid-template-columns: auto auto auto;
-
+      grid-template-columns: .5fr 2fr .5fr;
+      padding: 0;
       li {
+        padding: 6px 0;
+        &.menu {
+          background-color: white;
+
+          span {
+            font-family: "montserrat", sans-serif;
+            font-size: 2rem;
+            letter-spacing: -5px;
+            font-weight: 100;
+
+          }
+        }
+        &.bg-yellow{
+          background-color: #EDC124;
+          a {
+            color: white!important;
+          }
+        }
+        &.bg-blue {
+          background-color: #0C21ED;
+          color: white!important;
+          a {
+            color: white!important;
+          }
+        }
         a {
           text-decoration: none;
           font-family: 'Pacifico', cursive;
           color: rgb(31, 31, 31);
           font-size: 1.2rem;
 
-          .menu {
-            position: relative;
-            width: 100%;
-            height: 100%;
-
-            span {
-              font-family: "montserrat", sans-serif;
-              font-size: 2rem;
-              letter-spacing: -5px;
-              position: fixed;
-              transform: translate(-50%, -50%);
-              font-weight: 600;
-
-              &::after {
-                content: "";
-                box-shadow: 0 0 4px #525252;
-                z-index: -1;
-                background: white;
-                /* border: 0.5px solid black; */
-                position: absolute;
-                top: 0;
-                left: 50%;
-                width: 64px;
-                height: 64px;
-                border-radius: 32px;
-                transform: translate(-50%, -25%);
-              }
-            }
-          }
         }
       }
     }
