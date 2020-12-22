@@ -1,0 +1,70 @@
+{
+  "ALIMENTATION": [
+    "Boulangerie-pâtisserie, biscotterie-biscuiterie, pâtisserie de conservation (sauf terminaux de cuisson)",
+    "Conservation et transformation de fruits et légumes et autres produits alimentaires (sauf activités agricoles et vinification)",
+    "Conservation et transformation des produits de la mer, poissonnerie",
+    "Fabrication de glaces et sorbets, chocolaterie et confiserie",
+    "Fabrication de produits laitiers",
+    "Transformation de viande, boucherie, charcuterie, fabrication de produits à base de viande"
+  ],
+  "BATIMENT": [
+    "Aménagement, agencement et finition",
+    "Couverture, plomberie chauffage",
+    "Industries extractives (tourbe, pierre, argile…)",
+    "Maçonnerie et autres travaux de construction",
+    "Menuiserie",
+    "serrurerie",
+    "Orpaillage",
+    "Préparation des sites et terrassement",
+    "Travaux d'installation électrique et d'isolation",
+    "Travaux sous-marins de forage"
+  ],
+  "FABRICATION": [
+    "Fabrication d'articles textiles",
+    "Fabrication d'articles de sport, de jeux et de jouets",
+    "Fabrication d'instruments médicaux, de précision, d'optique, fabrication de lunettes et de matériel photographique",
+    "Fabrication d'instruments de musique",
+    "Fabrication de matériel agricole de machines et d'équipements et de matériel de transport",
+    "Fabrications d'objets divers",
+    "Fabrication et réparation d'articles d'horlogerie, bijouterie et bijouterie fantaisie",
+    "Fabrication et réparation de machines de bureau, de matériel informatique, de machines et appareils électriques, d'équipements de radio, de télévision et de communication",
+    "Fabrication et réparation de meubles",
+    "Fabrication et transformation des métaux : produits chimiques (sauf principes actifs sang et médicament) caoutchouc, matières plastiques et matériaux de construction",
+    "Fabrication de vêtements en cuir et fourrure",
+    "Imprimerie (sauf journaux) reliure et reproduction d'enregistrements",
+    "Récupération",
+    "Taxidermie",
+    "Transformation des fibres, tissage, ennoblissement",
+    "Transformation de matières nucléaires",
+    "Travail du bois, du papier et du carton",
+    "Travail du cuir et fabrication de chaussures",
+    "Travail du verre et des céramiques"
+  ],
+  "SERVICES": [
+    "Ambulances",
+    "Blanchisserie et pressing (sauf libre-service)",
+    "Coiffure",
+    "Compositions florales",
+    "Contrôle technique",
+    "Cordonnerie et réparation d'articles personnels et domestiques",
+    "Déménagement",
+    "Embaumement, soins mortuaires",
+    "Entretien et réparation de machines de bureau et de matériel informatique",
+    "Etalage, décoration",
+    "Finition et restauration de meubles, dorure, encadrement",
+    "Maréchalerie",
+    "Pose d'affiches, travaux à façon, conditionnement à façon",
+    "Ramonage, nettoyage, entretien de fosses septiques et désinsectisation",
+    "Réparation automobile cycles et motocycles",
+    "Réparation d'objets d'art",
+    "Spectacle de marionnettes",
+    "Soins de beauté",
+    "Taxis et voitures de remise",
+    "Toilettage d'animaux de compagnie",
+    "Travaux de photographiques",
+    "Voiture grande remise"
+  ],
+  "AUTRE" : [
+
+  ]
+}

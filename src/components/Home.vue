@@ -1,14 +1,21 @@
 <template>
-  <div class="container-plein" id="christmas-theme">
-    <div id="home-section">
-      <span>Pour Nöel</span>
-      <h1>Mes créations, <br> mon marché !</h1>
-      <div class="btn-section">
-        <router-link class="btn fill white" to="/inscription">Exposer vos créations</router-link>
-        <router-link class="btn plein warn" to="/visiter">Visiter le marché</router-link>
-      </div>
+  <section class="container-95 mt-2 mt-md-0 container-md-full bg-img color-white">
+    <div class="info-src">
+      <p>Source : https://images.unsplash.com/photo-1516652695352-6118f7cc1a07?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=752&q=80</p>
+      <p>auteur : Jacek Dylag | <a href='https://unsplash.com/@dylu'>@dylu</a></p>
     </div>
-  </div>
+    <div class="m-3">
+      <h1 class="branding"><router-link to="/" href="">Mes Créations <br> Mon marché</router-link></h1>
+      <h2>Trouvez les créations qui vous font envies !</h2>
+    </div>
+    <div class="cta-container">
+      <input class="fill fill-yellow" type="search" name="search" id="search" placeholder="Rechercher">
+      <router-link class="cta cta-blue" to="/inscription">Exposer mes creations</router-link>
+    </div>
+    <div  class="cta-container">
+      <router-link to="/visiter" class="cta cta-default absolute-99 shadow"><span>↓</span><span>Visiter</span><span>↓</span></router-link>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -25,39 +32,57 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-div {
-  align-self: center;
-  display: grid;
-  #home-section {
-    width: 30%;
-    height: fit-content;
-    margin-left: 6rem;
-    span {
-      font-size: 2rem;
-    }
-    h1 {
-      margin: 0;
-      padding: 16px 1px;
-      line-height: 80px;
-    }
-  }
-  .btn-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    .btn {
-      margin: 0 6px;
-      text-align: center;
-      justify-self: baseline;
-      &:hover {
-        filter: invert(.75);
-        transition: .3s ease-in-out;
-      }
-    }
+h1 {
+  a {
+    color: #ececec;
   }
 }
-#christmas-theme {
-  background: linear-gradient(90deg, #EE0D12, black);
-  color: white;
+
+.bg-img {
+  background-image: url("../assets/mader.png");
+  background-size: cover;
+  position: relative;
+  background-position: center;
+  .info-src {
+    position: absolute;
+    z-index: -1;
+  }
+}
+
+/*
+.########..########..######..##....##.########..#######..########.
+.##.....##.##.......##....##.##...##.....##....##.....##.##.....##
+.##.....##.##.......##.......##..##......##....##.....##.##.....##
+.##.....##.######....######..#####.......##....##.....##.########.
+.##.....##.##.............##.##..##......##....##.....##.##.......
+.##.....##.##.......##....##.##...##.....##....##.....##.##.......
+.########..########..######..##....##....##.....#######..##.......
+*/
+@media only screen and (min-width: 1080px) {
+}
+
+/*
+.########....###....########..##.......########.########
+....##......##.##...##.....##.##.......##..........##...
+....##.....##...##..##.....##.##.......##..........##...
+....##....##.....##.########..##.......######......##...
+....##....#########.##.....##.##.......##..........##...
+....##....##.....##.##.....##.##.......##..........##...
+....##....##.....##.########..########.########....##...
+*/
+@media only screen and (max-width: 1080px) and (min-width: 530px) {
+}
+/*
+.##.....##..#######..########..####.##.......########
+.###...###.##.....##.##.....##..##..##.......##......
+.####.####.##.....##.##.....##..##..##.......##......
+.##.###.##.##.....##.########...##..##.......######..
+.##.....##.##.....##.##.....##..##..##.......##......
+.##.....##.##.....##.##.....##..##..##.......##......
+.##.....##..#######..########..####.########.########
+*/
+@media only screen and (max-width: 530px) {
+
 }
 
 </style>
