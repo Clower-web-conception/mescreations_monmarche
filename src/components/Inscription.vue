@@ -1,7 +1,7 @@
 <template>
 <div>
   <h1 class="branding"><router-link to="/" href="">Mes Créations <br> Mon marché</router-link></h1>
-  <form action="" enctype="multipart/form-data">
+  <form enctype="multipart/form-data">
     <div>
       <h3>Informations d'entreprise</h3>
       <div class="form-item horizontal">
@@ -107,7 +107,7 @@
       </div>
       <div class="form-item horizontal mob-vertical">
         <div></div>
-        <a @click="valideForm" class="bg-green">Envoyer</a>
+        <a type="submit" @click="valideForm" class="bg-green">Envoyer</a>
       </div>
     </div>
   </form>
@@ -168,6 +168,12 @@ export default {
   created : function () {
     this.debouncedGetSiret = _.debounce(this.getSiret, 500)
   },
+  mounted : function() {
+    console.log(window.parent.location)
+    console.log(window.parent.location.hostname)
+    console.log(window.parent.location.port)
+    console.log(window.parent.location.host)
+  },
   methods: {
   /**
    * method : GET
@@ -180,13 +186,13 @@ export default {
           .get(url + vm.siret, {
             //header et proxy à ajouter dans le code du localhost afin de gérer les problèmes de lecture de l'api en local
             headers: {
-              'Access-Control-Allow-Origin': "http://192.168.8.125:8080",
+              'Access-Control-Allow-Origin': window.parent.location.origin,
               Accept: "application/json",
               Authorization: `Bearer ${token}`
             },
             proxy: {
-              host: '192.168.8.125',
-              port: '8080'
+              host: window.parent.location.hostname,
+              port: window.parent.location.port
             }
           })
           .then(function (response) {
@@ -216,6 +222,7 @@ export default {
      */
     postMedias : function () {
       let formData = new FormData()
+      let wpToken = "cLgMYhlXlvVHCMDQAZy3qwu1y3yvVIgS"
       this.selectedFiles.forEach((img) => {
         formData.append('file', img)
       })
@@ -223,7 +230,14 @@ export default {
         axios.post('http://35.181.24.239.xip.io/wp-json/wp/v2/media', formData,
             {
               headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'multipart/form-data',
+                'Access-Control-Allow-Origin': window.parent.location.origin,
+                Accept: "application/json",
+                Authorization: `Bearer ${wpToken}`
+              },
+              proxy: {
+                host: window.parent.location.hostname,
+                port: window.parent.location.port
               }
             }
         ).then(function(){
